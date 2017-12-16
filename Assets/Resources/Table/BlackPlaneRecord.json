@@ -1,0 +1,13 @@
+BlackPlaneRecord:
+{
+  "Info": 
+  [
+    {
+      "ID": 10101,
+      "Texture": 101,
+      "ModelID": 1001,
+      "Name": "Black",
+      "Desc": "검은 비행기"
+    }
+  ]
+}

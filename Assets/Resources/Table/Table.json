@@ -1,0 +1,26 @@
+"TableRecord":
+{
+  "Info": 
+  [
+    {
+      "type": "RESOURCE",
+      "path": "Table/Resource"
+    },
+    {
+      "type": "PLANE",
+      "path": "Table/BlackPlaneRecord"
+    },
+    {
+      "type": "PLANE",
+      "path": "Table/BluePlaneRecord"
+    },
+    {
+      "type": "PLANE",
+      "path": "Table/RedPlaneRecord"
+    },
+    {
+      "type": "PLANE",
+      "path": "Table/GreenPlaneRecord"
+    }
+  ]
+}

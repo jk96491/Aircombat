@@ -1,0 +1,38 @@
+ResourceRecord:
+{
+  "Info": 
+  [
+    {
+      "ID": 101,
+      "path": "Texture/Plane/BlackTex"
+    },
+    {
+      "ID": 102,
+      "path": "Texture/Plane/BlueTex"
+    },
+    {
+      "ID": 103,
+      "path": "Texture/Plane/RedTex"
+    },
+    {
+      "ID": 104,
+      "path": "Texture/Plane/GreenTex"
+    },
+    {
+      "ID": 1001,
+      "path": "Black"
+    },
+    {
+      "ID": 1002,
+      "path": "Blue"
+    },
+    {
+      "ID": 1003,
+      "path": "Red"
+    },
+    {
+      "ID": 1004,
+      "path": "Green"
+    }
+  ]
+}

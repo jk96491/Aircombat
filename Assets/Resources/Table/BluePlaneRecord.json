@@ -1,0 +1,13 @@
+BluePlaneRecord:
+{
+  "Info": 
+  [
+    {
+      "ID": 20101,
+      "Texture": 102,
+      "ModelID": 1002,
+      "Name": "Blue",
+      "Desc": "파란 비행기"
+    }
+  ]
+}
