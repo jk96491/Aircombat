@@ -9,6 +9,8 @@ public class UI_SelectPlane : UI_LayerBase {
     private Button exitBtn = null;
     [SerializeField]
     private Image[] planeImage = null;
+    [SerializeField]
+    private List<UI_PlaneView> planeViewList = new List<UI_PlaneView>(); 
 
     private List<PlaneRecord.PlaneInfo> planeList = new List<PlaneRecord.PlaneInfo>();
 
@@ -27,16 +29,29 @@ public class UI_SelectPlane : UI_LayerBase {
         {
             planeList.Add(PlaneEtor.Current.Value);
         }
-
-        for(int i = 0; i < planeList.Count;i++)
+        for(int i = 0; i < planeViewList.Count; i++)
         {
-            string path = GameData.Instance.resourceRecord.FindResourcePathByID(planeList[i].TextureID);
-            
-            Sprite texture = Resources.Load(path, typeof(Sprite)) as Sprite;
+            planeViewList[i].dataIndex = planeList[i].ID;
+            planeViewList[i].onClick = HandleOnClickPlane;
 
-            planeImage[i].sprite = texture;
+            string path = GameData.Instance.resourceRecord.FindResourcePathByID(planeList[i].TextureID);
+
+            Sprite texture = Resources.Load(path, typeof(Sprite)) as Sprite;
+            planeViewList[i].SetImage(texture);
         }
 
+    }
+
+    public void HandleOnClickPlane(UI_ViewBase viewBase_)
+    {
+        string path = GameData.Instance.resourceRecord.FindResourcePathByID(viewBase_.dataIndex);
+
+        GameObject planePrefab = Resources.Load(path) as GameObject;
+
+        if(null != planePrefab)
+        {
+            Instantiate(planePrefab);
+        }
     }
 
     private void HandleOnClickExit()

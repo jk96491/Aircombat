@@ -11,14 +11,22 @@ public class UI_ViewBase : MonoBehaviour
     [SerializeField]
     private Image image = null;
 
-    protected Action onClick = null;
+    public int dataIndex = -1;
+
+    public Action<UI_ViewBase> onClick = null;
 
     protected virtual void HandleOnClickButton()
     {
         if(null != onClick)
         {
-            onClick();
+            onClick(this);
         }
+    }
+
+    public void SetImage(Sprite image_)
+    {
+        if(null != image)
+            image.sprite = image_;
     }
 } 
 
