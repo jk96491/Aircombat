@@ -10,7 +10,9 @@ public class UI_SelectPlane : UI_LayerBase {
     [SerializeField]
     private Image[] planeImage = null;
     [SerializeField]
-    private List<UI_PlaneView> planeViewList = new List<UI_PlaneView>(); 
+    private List<UI_PlaneView> planeViewList = new List<UI_PlaneView>();
+
+    private GameObject Plane = null;
 
     private List<PlaneRecord.PlaneInfo> planeList = new List<PlaneRecord.PlaneInfo>();
 
@@ -44,13 +46,20 @@ public class UI_SelectPlane : UI_LayerBase {
 
     public void HandleOnClickPlane(UI_ViewBase viewBase_)
     {
-        string path = GameData.Instance.resourceRecord.FindResourcePathByID(viewBase_.dataIndex);
+        PlaneRecord.PlaneInfo info = GameData.Instance.planeRecord.FindPlane(viewBase_.dataIndex);
+
+        string path = GameData.Instance.resourceRecord.FindResourcePathByID(info.ModelID);
 
         GameObject planePrefab = Resources.Load(path) as GameObject;
 
         if(null != planePrefab)
         {
-            Instantiate(planePrefab);
+            if(null != Plane)
+            {
+                Destroy(Plane);
+            }
+            Plane = Instantiate(planePrefab);
+            Plane.transform.localPosition = new Vector3(0, 0 ,10);
         }
     }
 

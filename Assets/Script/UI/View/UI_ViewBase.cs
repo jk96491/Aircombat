@@ -15,7 +15,7 @@ public class UI_ViewBase : MonoBehaviour
 
     public Action<UI_ViewBase> onClick = null;
 
-    protected virtual void HandleOnClickButton()
+    public virtual void HandleOnClickButton()
     {
         if(null != onClick)
         {

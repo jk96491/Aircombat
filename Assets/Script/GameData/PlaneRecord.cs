@@ -54,4 +54,9 @@ public class PlaneRecord : IRecord {
     {
         return this._dataDic.GetEnumerator();
     }
+
+    public PlaneInfo FindPlane(int ID_)
+    {
+        return this._dataDic[ID_];
+    }
 }
