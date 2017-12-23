@@ -44,24 +44,32 @@ public class UI_SelectPlane : UI_LayerBase {
             Sprite texture = Resources.Load(path, typeof(Sprite)) as Sprite;
             planeViewList[i].SetImage(texture);
         }
+
+        LoadPlane(UserManager.Instance.localUser._currentPlaneID);
     }
 
     public void HandleOnClickPlane(UI_ViewBase viewBase_)
     {
-        PlaneRecord.PlaneInfo info = GameData.Instance.planeRecord.FindPlane(viewBase_.dataIndex);
+        LoadPlane(viewBase_.dataIndex);
+        UserManager.Instance.localUser._currentPlaneID = viewBase_.dataIndex;
+    }
+
+    private void LoadPlane(int planeID_)
+    {
+        PlaneRecord.PlaneInfo info = GameData.Instance.planeRecord.FindPlane(planeID_);
 
         string path = GameData.Instance.resourceRecord.FindResourcePathByID(info.ModelID);
 
         GameObject planePrefab = Resources.Load(path) as GameObject;
 
-        if(null != planePrefab)
+        if (null != planePrefab)
         {
-            if(null != Plane)
+            if (null != Plane)
             {
                 Destroy(Plane);
             }
             Plane = Instantiate(planePrefab);
-            Plane.transform.localPosition = new Vector3(0, 0 ,10);
+            Plane.transform.localPosition = new Vector3(0, 0, 10);
         }
     }
 

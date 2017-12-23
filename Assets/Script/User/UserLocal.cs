@@ -15,7 +15,7 @@ public class UserLocal : UserBase
         Init();
     }
 
-    private int _currentPlaneID = 10101; //  임시코드
+    public int _currentPlaneID = 10101; //  임시코드
 
     public UserMoney money = new UserMoney();
 
@@ -27,7 +27,10 @@ public class UserLocal : UserBase
 
     public string GetCurrentPlane()
     {
-        return null;
+        PlaneRecord.PlaneInfo info = GameData.Instance.planeRecord.FindPlane(_currentPlaneID);
+
+        string path = GameData.Instance.resourceRecord.FindResourcePathByID(info.ModelID);
+        return path;
     }
 
     public void SetMoney(UserMoney money_)
