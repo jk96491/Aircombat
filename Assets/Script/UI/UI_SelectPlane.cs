@@ -8,8 +8,6 @@ public class UI_SelectPlane : UI_LayerBase {
     [SerializeField]
     private Button exitBtn = null;
     [SerializeField]
-    private Image[] planeImage = null;
-    [SerializeField]
     private List<UI_PlaneView> planeViewList = new List<UI_PlaneView>();
 
     private GameObject Plane = null;
@@ -67,5 +65,16 @@ public class UI_SelectPlane : UI_LayerBase {
     {
         UIManager.Instance.OpenUI(UIManager.UIType.UI_LOBBY);
         UIManager.Instance.CloseUI(UIManager.UIType.UI_SELECT_PLANE);
+    }
+
+    protected override void DeActivate()
+    {
+        if (null != Plane)
+        {
+            Destroy(Plane);
+        }
+
+        planeViewList.Clear();
+        planeList.Clear();
     }
 }

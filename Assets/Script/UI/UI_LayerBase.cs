@@ -18,6 +18,16 @@ public class UI_LayerBase : MonoBehaviour
     {
 
     }
+
+    protected virtual void DeActivate()
+    {
+
+    }
+
+    public void DeActiveUI()
+    {
+        DeActivate();
+    }
 }   
 
     

@@ -106,7 +106,11 @@ public class UIManager : MonoBehaviour{
             uiLayer = loadedUI_Dic[type_];
         }
 
-        uiLayer.gameObject.SetActive(false);
+        if(null != uiLayer)
+        {
+            uiLayer.DeActiveUI();
+            uiLayer.gameObject.SetActive(false);
+        }
     }
 
     public void ClosePopupUI()
