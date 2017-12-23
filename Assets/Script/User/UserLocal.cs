@@ -15,7 +15,28 @@ public class UserLocal : UserBase
         Init();
     }
 
-    public int _currentPlaneID = 10101; //  임시코드
+    private int _currentPlaneID; //  임시코드
+
+    public int CurrentPlane
+    {
+        get
+        {
+            string planeKey = string.Format("{0}:myPlane", userID);
+            _currentPlaneID = PlayerPrefs.GetInt(planeKey, -1);
+            if (_currentPlaneID == -1)
+            {
+                _currentPlaneID = 10101;
+            }
+
+            return _currentPlaneID;
+        }
+    }
+
+    public void SetPlane(int planeID_)
+    {
+        _currentPlaneID = planeID_;
+    }
+
 
     public UserMoney money = new UserMoney();
 
@@ -23,6 +44,13 @@ public class UserLocal : UserBase
 
     public void Init()
     {
+        string planeKey = string.Format("{0}:myPlane", userID);
+        _currentPlaneID = PlayerPrefs.GetInt(planeKey, -1);
+
+        if(_currentPlaneID == -1)
+        {
+            _currentPlaneID = 10101;
+        }
     } 
 
     public string GetCurrentPlane()

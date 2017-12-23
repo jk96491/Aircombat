@@ -45,13 +45,18 @@ public class UI_SelectPlane : UI_LayerBase {
             planeViewList[i].SetImage(texture);
         }
 
-        LoadPlane(UserManager.Instance.localUser._currentPlaneID);
+        LoadPlane(UserManager.Instance.localUser.CurrentPlane);
     }
 
     public void HandleOnClickPlane(UI_ViewBase viewBase_)
     {
-        LoadPlane(viewBase_.dataIndex);
-        UserManager.Instance.localUser._currentPlaneID = viewBase_.dataIndex;
+        NppChangePlane.RequestPlaneChange(UserManager.Instance.localUser.UserId, viewBase_.dataIndex, HandleOnSuccessChangePlane, null);
+    }
+
+    public void HandleOnSuccessChangePlane(int planeID_)
+    {
+        LoadPlane(planeID_);
+        UserManager.Instance.localUser.SetPlane(planeID_);
     }
 
     private void LoadPlane(int planeID_)
@@ -71,8 +76,6 @@ public class UI_SelectPlane : UI_LayerBase {
             Plane = Instantiate(planePrefab);
             Plane.transform.localPosition = new Vector3(0, 0, 10);
         }
-
-        UserManager.Instance.localUser._currentPlaneID = viewBase_.dataIndex;
     }
 
     private void HandleOnClickExit()
