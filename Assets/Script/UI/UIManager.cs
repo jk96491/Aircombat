@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour{
         if(true == loadedUI_Dic.ContainsKey(type_))
         {
             ui_layer = loadedUI_Dic[type_];
+            ui_layer.RefreshUI();
             ui_layer.gameObject.SetActive(true);
             return;
         }

@@ -19,6 +19,11 @@ public class UI_LayerBase : MonoBehaviour
 
     }
 
+    public void RefreshUI()
+    {
+        Refresh();
+    }
+
     protected virtual void DeActivate()
     {
 

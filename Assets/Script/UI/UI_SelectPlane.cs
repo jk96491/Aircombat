@@ -21,15 +21,20 @@ public class UI_SelectPlane : UI_LayerBase {
             exitBtn.onClick.AddListener(HandleOnClickExit);
         }
 
+        Refresh();
+    }
+
+    private void SetData()
+    {
         planeList.Clear();
 
         var PlaneEtor = GameData.Instance.planeRecord.GetPlaneEtor();
 
-        while(true == PlaneEtor.MoveNext())
+        while (true == PlaneEtor.MoveNext())
         {
             planeList.Add(PlaneEtor.Current.Value);
         }
-        for(int i = 0; i < planeViewList.Count; i++)
+        for (int i = 0; i < planeViewList.Count; i++)
         {
             planeViewList[i].dataIndex = planeList[i].ID;
             planeViewList[i].onClick = HandleOnClickPlane;
@@ -39,7 +44,6 @@ public class UI_SelectPlane : UI_LayerBase {
             Sprite texture = Resources.Load(path, typeof(Sprite)) as Sprite;
             planeViewList[i].SetImage(texture);
         }
-
     }
 
     public void HandleOnClickPlane(UI_ViewBase viewBase_)
@@ -65,6 +69,11 @@ public class UI_SelectPlane : UI_LayerBase {
     {
         UIManager.Instance.OpenUI(UIManager.UIType.UI_LOBBY);
         UIManager.Instance.CloseUI(UIManager.UIType.UI_SELECT_PLANE);
+    }
+
+    protected override void Refresh()
+    {
+        SetData();
     }
 
     protected override void DeActivate()
