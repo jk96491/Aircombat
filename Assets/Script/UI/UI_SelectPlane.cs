@@ -71,6 +71,8 @@ public class UI_SelectPlane : UI_LayerBase {
             Plane = Instantiate(planePrefab);
             Plane.transform.localPosition = new Vector3(0, 0, 10);
         }
+
+        UserManager.Instance.localUser._currentPlaneID = viewBase_.dataIndex;
     }
 
     private void HandleOnClickExit()
