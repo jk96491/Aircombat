@@ -33,9 +33,11 @@ public class UI_LayerGame : UI_LayerBase
 
         GameObject myPlanePrefab = Resources.Load(UserManager.Instance.localUser.GetCurrentPlane()) as GameObject;
         GameObject startPosObj = GameObject.Find("StartPos");
-        GameObject plane = Instantiate(myPlanePrefab, startPosObj.transform.position, startPosObj.transform.rotation);
+        GameObject plane = Instantiate(myPlanePrefab, startPosObj.transform.position, startPosObj.transform.localRotation);
 
-        if(null != plane)
+        plane.transform.localRotation = startPosObj.transform.localRotation;
+
+        if (null != plane)
         {
             player = plane.GetComponent<PlaneBase>();
         }

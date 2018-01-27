@@ -13,7 +13,13 @@ public class Mapscroll : MonoBehaviour {
     [SerializeField]
     private Vector3 startPos = Vector3.zero;
 
+    public bool isGameStart = false;
+
 	void Update () {
+
+        if (false == isGameStart)
+            return;
+
         if (null != myTrans)
         {
             myTrans.Translate(new Vector3(0, 0, 1) * scrollSpeed * Time.deltaTime);

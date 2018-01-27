@@ -54,7 +54,7 @@ public class PlaneBase : MonoBehaviour {
     IEnumerator FireShot()
     {
         IsFired = true;
-        ProjectileManager.Instance.CreateBullet(myTrans.forward, firePos.transform.position);
+        //ProjectileManager.Instance.CreateBullet(myTrans.forward, firePos.transform.position);
         yield return new WaitForSeconds(0.05f);
 
         IsFired = false;
