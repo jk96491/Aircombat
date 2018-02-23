@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UI_LayerLogin : UI_LayerBase {
     [SerializeField]
-    private Button LoginButton = null;
+    private UIButton LoginButton = null;
     [SerializeField]
-    private InputField LoginInput = null;
+    private UIInput LoginInput = null;
 
     private void Start()
     {
         if(null != LoginButton)
         {
-            LoginButton.onClick.AddListener(HandleOnClickLoginButton);
+            LoginButton.onClick.Add(new EventDelegate(HandleOnClickLoginButton));
         }
     }
 
     private void HandleOnClickLoginButton()
     {
-        if(true == string.IsNullOrEmpty(LoginInput.text))
+        if(true == string.IsNullOrEmpty(LoginInput.value))
         {
             return;
         }
 
-        UserManager.Instance.localUser.RequsetLogin(LoginInput.text, HandleOnLoginSucess);
+        UserManager.Instance.localUser.RequsetLogin(LoginInput.value, HandleOnLoginSucess);
     }
 
     private void HandleOnLoginSucess()

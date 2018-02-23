@@ -53,7 +53,8 @@ public class UIManager : Singleton<UIManager>
             ui_layer = uiObj.GetComponent<UI_LayerBase>();
             loadedUI_Dic.Add(type_, ui_layer);
             uiObj.transform.SetParent(root.transform);
-            uiObj.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            uiObj.GetComponent<Transform>().localPosition = Vector3.zero;
+            uiObj.GetComponent<Transform>().localScale = Vector3.one;
             ui_layer.InitUI();
         }
     }
