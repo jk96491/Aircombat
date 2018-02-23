@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour{
+public class UIManager : Singleton<UIManager>
+{
 
     public enum UIType {
         UI_LOGIN,
@@ -12,17 +13,9 @@ public class UIManager : MonoBehaviour{
         UI_PopUp
     }
     
-    static UIManager _instance = new UIManager();
-
     private Dictionary<UIType/*UI_Type*/, UI_LayerBase> loadedUI_Dic = new Dictionary<UIType, UI_LayerBase>();
-
-    public static UIManager Instance
-    {
-        get
-        {
-            return _instance;
-        }
-    }
+    [SerializeField]
+    private UIRoot root = null;
 
     public void OpenUI(UIType type_)
     {
@@ -39,7 +32,6 @@ public class UIManager : MonoBehaviour{
         }
         else
         {
-            GameObject canvas = GameObject.Find("Canvas");
             //로드
             switch (type_)
             {
@@ -60,7 +52,7 @@ public class UIManager : MonoBehaviour{
             uiObj = Instantiate(uiPrefab);
             ui_layer = uiObj.GetComponent<UI_LayerBase>();
             loadedUI_Dic.Add(type_, ui_layer);
-            uiObj.transform.SetParent(canvas.transform);
+            uiObj.transform.SetParent(root.transform);
             uiObj.GetComponent<RectTransform>().localPosition = Vector3.zero;
             ui_layer.InitUI();
         }

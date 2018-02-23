@@ -59,7 +59,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         GameObject singleton = null;
         string path = string.Empty;
         if (typeof(T) == typeof(UIManager))
-            path = "Prefab/UIManager";
+            path = "Prefabs/UIManager";
       
 
         if (string.IsNullOrEmpty(path))
@@ -69,7 +69,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
         else
         {
-            T item = Resources.Load(path, typeof(T)) as T;
+            //T item = Resources.Load(path, typeof(T)) as T;
+            GameObject item = Resources.Load(path) as GameObject;
             singleton = GameObject.Instantiate(item.gameObject);
             _instance = singleton.GetComponent<T>();
         }
