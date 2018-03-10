@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class UI_ViewBase : MonoBehaviour
 {
     [SerializeField]
-    private Button button = null;
+    private UIButton button = null;
     [SerializeField]
-    private Image image = null;
+    private UITexture image = null;
 
     public int dataIndex = -1;
 
@@ -23,10 +23,10 @@ public class UI_ViewBase : MonoBehaviour
         }
     }
 
-    public void SetImage(Sprite image_)
+    public void SetImage(Texture image_)
     {
         if(null != image)
-            image.sprite = image_;
+            image.mainTexture = image_;
     }
 } 
 

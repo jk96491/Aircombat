@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UI_SelectPlane : UI_LayerBase {
 
     [SerializeField]
-    private Button exitBtn = null;
+    private UIButton exitBtn = null;
     [SerializeField]
     private List<UI_PlaneView> planeViewList = new List<UI_PlaneView>();
 
@@ -18,7 +18,7 @@ public class UI_SelectPlane : UI_LayerBase {
     {
         if (null != exitBtn)
         {
-            exitBtn.onClick.AddListener(HandleOnClickExit);
+            exitBtn.onClick.Add(new EventDelegate(HandleOnClickExit));
         }
 
         Refresh();
@@ -41,7 +41,7 @@ public class UI_SelectPlane : UI_LayerBase {
 
             string path = GameData.Instance.resourceRecord.FindResourcePathByID(planeList[i].TextureID);
 
-            Sprite texture = Resources.Load(path, typeof(Sprite)) as Sprite;
+            Texture texture = Resources.Load(path, typeof(Texture)) as Texture;
             planeViewList[i].SetImage(texture);
         }
 

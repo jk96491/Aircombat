@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class UI_LayerLobby : UI_LayerBase {
     [SerializeField]
-    private Button startBtn = null;
+    private UIButton startBtn = null;
     [SerializeField]
-    private Button selectPlaneBtn = null;
+    private UIButton selectPlaneBtn = null;
     [SerializeField]
-    private Text goldValue = null;
+    private UILabel goldValue = null;
     [SerializeField]
-    private Text gemValue = null;
+    private UILabel gemValue = null;
     [SerializeField]
-    private Text NicknameValue = null;
+    private UILabel NicknameValue = null;
 
     protected override void Initailize()
     {
         if (null != startBtn)
         {
-            startBtn.onClick.AddListener(HandleOnClickStartButton);
+            startBtn.onClick.Add(new EventDelegate( HandleOnClickStartButton));
         }
 
         if (null != selectPlaneBtn)
         {
-            selectPlaneBtn.onClick.AddListener(HandleOnClickSelectPlaneButton);
+            selectPlaneBtn.onClick.Add(new EventDelegate(HandleOnClickSelectPlaneButton));
         }
 
         if (null != goldValue)
