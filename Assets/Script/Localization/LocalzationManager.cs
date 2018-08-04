@@ -25,7 +25,7 @@ public class LocalzationManager : MonoBehaviour {
     public void Initi()
     {
         Object localizeAsset = null;
-        localizeAsset = AssetFiles.Instant.LoadAsset("Table/Korean");
+        localizeAsset = Resources.Load("Table/Korean");
         if (localizeAsset != null)
             Localization.Load((TextAsset)localizeAsset);
 
