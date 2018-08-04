@@ -32,7 +32,7 @@ public class cUILabel : UILabel
 
     void OnLocalize()
     {
-      
+        this.text = Localization.Get(TEXT_KEY);
     }
     
 }

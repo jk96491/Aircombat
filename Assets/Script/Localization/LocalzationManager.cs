@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class LocalzationManager : MonoBehaviour {
 
-	static LocalzationManager _Instant = null;
+    public enum LanType : sbyte
+    {
+        NONE = -1,
+        KOREAN,
+        ENGLISH,
+    }
+
+    public LanType currentLan;
+
+
+    static LocalzationManager _Instant = null;
 
 	//---------------------------------------------------
 	// Attribute Funtion.
@@ -22,13 +32,26 @@ public class LocalzationManager : MonoBehaviour {
 		}
 	}
 
-    public void Initi()
+    public void Init(LanType lanType_)
     {
+        currentLan = lanType_;
         Object localizeAsset = null;
-        localizeAsset = Resources.Load("Table/Korean");
+
+        switch (lanType_)
+        {
+            case LanType.KOREAN: localizeAsset = Resources.Load("Table/Korean"); break;
+            case LanType.ENGLISH: localizeAsset = Resources.Load("Table/English"); break;
+        }
+
+        
         if (localizeAsset != null)
             Localization.Load((TextAsset)localizeAsset);
 
+    }
+
+    public void ChangeLan(LanType lanType_)
+    {
+        Init(lanType_);
     }
 
 }
