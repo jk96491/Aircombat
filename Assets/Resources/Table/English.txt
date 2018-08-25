@@ -1,3 +1,4 @@
 ﻿1 = Rock\nPaper\nScissors
 2 = Tap to Start
 3 = Score
+4 = ChangeLanguage ->
