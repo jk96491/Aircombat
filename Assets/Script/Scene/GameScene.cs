@@ -10,6 +10,15 @@ public enum SelectType : int
     Paper
 }
 
+public enum ResultType : int
+{
+    none = -1,
+    Win,
+    Draw,
+    Lose
+}
+
+
 public class GameScene : MonoBehaviour {
     [SerializeField]
     private UIToggleController SelectController = null;
@@ -114,7 +123,7 @@ public class GameScene : MonoBehaviour {
     {
         ComSelect = (SelectType)Random.Range(0, 3);
         SetSprite(ComSprite, ComSelect);
-        Debug.LogError(ComSelect);
+        Debug.LogError(GetResultMine());
 
         StartCoroutine(Delay());
     }
@@ -133,5 +142,43 @@ public class GameScene : MonoBehaviour {
         if (SelectController != null)
             SelectController.DisableAllToggle();
 
+    }
+    private ResultType GetResultMine()
+    {
+        ResultType result = ResultType.none;
+
+        if (UserSelect == ComSelect)
+            result = ResultType.Draw;
+        else
+        {
+            // 보를 낼 때
+            if(UserSelect == SelectType.Paper)
+            {
+                if (ComSelect == SelectType.Rock)
+                    result = ResultType.Win;
+                else
+                    result = ResultType.Lose;
+            }
+
+            // 가위를 낼 때
+            else if (UserSelect == SelectType.Scissor)
+            {
+                if (ComSelect == SelectType.Paper)
+                    result = ResultType.Win;
+                else
+                    result = ResultType.Lose;
+            }
+
+            // 바위를 낼 때
+            else if (UserSelect == SelectType.Rock)
+            {
+                if (ComSelect == SelectType.Scissor)
+                    result = ResultType.Win;
+                else
+                    result = ResultType.Lose;
+            }
+        }
+
+        return result;
     }
 }
