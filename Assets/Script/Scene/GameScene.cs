@@ -181,4 +181,23 @@ public class GameScene : MonoBehaviour {
 
         return result;
     }
+
+    private ResultType GetResult()
+    {
+        ResultType result = ResultType.none;
+
+        if (UserSelect == ComSelect)
+            result = ResultType.Draw;
+        else
+        {
+            switch (UserSelect)
+            {
+                case SelectType.Paper: result = ComSelect == SelectType.Rock ? ResultType.Win : ResultType.Lose; break;
+                case SelectType.Rock: result = ComSelect == SelectType.Scissor ? ResultType.Win : ResultType.Lose; break;
+                case SelectType.Scissor: result = ComSelect == SelectType.Paper ? ResultType.Win : ResultType.Lose; break;
+            }
+        }
+
+        return result;
+    }
 }
