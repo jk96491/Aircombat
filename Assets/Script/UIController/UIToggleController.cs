@@ -27,6 +27,18 @@ public class UIToggleController : MonoBehaviour
         }
     }
 
+    public void DisableAllToggle()
+    {
+        if (null != toggles)
+        {
+            for (int i = 0; i < toggles.Length; i++)
+            {
+                if (null != toggles[i])
+                    toggles[i].value = false;
+            }
+        }
+    }
+
     public void InitToggles()
     {
         if (null != toggles)
