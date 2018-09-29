@@ -1,4 +1,4 @@
 ﻿1 = Rock\nPaper\nScissors
 2 = Tap to Start
-3 = Score
+3 = {0}Win {1}Lose {2}Draw
 4 = ChangeLanguage ->

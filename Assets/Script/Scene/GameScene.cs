@@ -22,6 +22,8 @@ public enum ResultType : int
 public class GameScene : MonoBehaviour {
     [SerializeField]
     private UIToggleController SelectController = null;
+    [SerializeField]
+    private UILabel RecordLabel = null;
     
     private SelectType UserSelect = SelectType.none;
     private SelectType ComSelect = SelectType.none;
@@ -41,6 +43,14 @@ public class GameScene : MonoBehaviour {
     [SerializeField]
     private UISprite ComSprite = null;
 
+    [Header("[전적 관련]")]
+    [SerializeField]
+    private int WinCount = 0;
+    [SerializeField]
+    private int LoseCount = 0;
+    [SerializeField]
+    private int DrawCount = 0;
+
     // Use this for initialization
     void Start ()
     {
@@ -54,6 +64,11 @@ public class GameScene : MonoBehaviour {
         SetBlock(false);
         SetAniInfo(UserAni, true);
         SetAniInfo(ComAni, true);
+    }
+
+    private void OnEnable()
+    {
+        SetRecordLabel();
     }
 
     public void HandleOnSelect(int clickIndex)
@@ -123,7 +138,11 @@ public class GameScene : MonoBehaviour {
     {
         ComSelect = (SelectType)Random.Range(0, 3);
         SetSprite(ComSprite, ComSelect);
-        Debug.LogError(GetResultMine());
+
+        ResultType result = GetResult();
+        Debug.LogError(result);
+        SetRecord(result);
+        SetRecordLabel();
 
         StartCoroutine(Delay());
     }
@@ -199,5 +218,21 @@ public class GameScene : MonoBehaviour {
         }
 
         return result;
+    }
+
+    private void SetRecord(ResultType Type)
+    {
+        switch (Type)
+        {
+            case ResultType.Win: WinCount++; break;
+            case ResultType.Lose: LoseCount++; break;
+            case ResultType.Draw: DrawCount++; break;
+        }
+    }
+
+    private void SetRecordLabel()
+    {
+        if (null != RecordLabel)
+            RecordLabel.text = string.Format(Localization.Get("3"), WinCount, LoseCount, DrawCount);
     }
 }
