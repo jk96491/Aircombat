@@ -50,6 +50,13 @@ public class GameScene : MonoBehaviour {
     private int LoseCount = 0;
     [SerializeField]
     private int DrawCount = 0;
+    [SerializeField]
+    private UILabel WinLabel = null;
+    [SerializeField]
+    private UILabel LoseLabel = null;
+    [SerializeField]
+    private UILabel DrawLabel = null;
+
 
     // Use this for initialization
     void Start ()
@@ -64,6 +71,18 @@ public class GameScene : MonoBehaviour {
         SetBlock(false);
         SetAniInfo(UserAni, true);
         SetAniInfo(ComAni, true);
+    }
+
+    private void SetResultLabel()
+    {
+        if (null != WinLabel)
+            WinLabel.text = Localization.Get("10");
+
+        if (null != LoseLabel)
+            LoseLabel.text = Localization.Get("11");
+
+        if (null != DrawLabel)
+            DrawLabel.text = Localization.Get("12");
     }
 
     private void OnEnable()

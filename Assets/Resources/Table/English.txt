@@ -2,3 +2,7 @@
 2 = Tap to Start
 3 = [1DDB16]{0}[-]W [ff0000]{1}[-]L [ffE400]{2}[-]D
 4 = ChangeLanguage ->
+
+10 = Win!
+11 = Lose..
+12 = Draw
