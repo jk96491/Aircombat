@@ -24,6 +24,8 @@ public class GameScene : MonoBehaviour {
     private UIToggleController SelectController = null;
     [SerializeField]
     private UILabel RecordLabel = null;
+    [SerializeField]
+    private GameObject VsObj = null;
     
     private SelectType UserSelect = SelectType.none;
     private SelectType ComSelect = SelectType.none;
@@ -235,6 +237,7 @@ public class GameScene : MonoBehaviour {
         Debug.LogError(result);
         SetRecord(result);
         ActiveResultObj(result);
+        SetActiveVsObj(false);
         SetRecordLabel();
 
         StartCoroutine(Delay());
@@ -254,6 +257,7 @@ public class GameScene : MonoBehaviour {
         if (SelectController != null)
             SelectController.DisableAllToggle();
         ResetResultObjs();
+        SetActiveVsObj(true);
 
     }
     private ResultType GetResultMine()
@@ -329,4 +333,13 @@ public class GameScene : MonoBehaviour {
         if (null != RecordLabel)
             RecordLabel.text = string.Format(Localization.Get("3"), WinCount, LoseCount, DrawCount);
     }
+
+    private void SetActiveVsObj(bool active)
+    {
+        if (null != VsObj)
+        {
+            VsObj.SetActive(active);
+        }
+    }
+
 }
