@@ -331,13 +331,16 @@ public class GameScene : MonoBehaviour {
     private void SetRecordLabel()
     {
         if (null != RecordLabel)
+        {
             RecordLabel.text = string.Format(Localization.Get("3"), WinCount, LoseCount, DrawCount);
+        }
     }
 
     private void SetActiveVsObj(bool active)
     {
         if (null != VsObj)
+        {
             VsObj.SetActive(active);
+        }
     }
-
 }
