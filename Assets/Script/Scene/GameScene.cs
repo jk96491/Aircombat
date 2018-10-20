@@ -343,4 +343,18 @@ public class GameScene : MonoBehaviour {
             VsObj.SetActive(active);
         }
     }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if(pause == true)
+        {
+            // 앱이 백그라운드로 나갔을때
+            Time.timeScale = 0;
+        }
+        else
+        {
+            // 앱이 포그라운드로 들어 왔을때
+            Time.timeScale = 1;
+        }
+    }
 }
