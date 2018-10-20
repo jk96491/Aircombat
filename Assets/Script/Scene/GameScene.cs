@@ -230,7 +230,7 @@ public class GameScene : MonoBehaviour {
     
     private void ComSelecting()
     {
-        ComSelect = (SelectType)Random.Range(0, 3);
+        ComSelect = (SelectType)(Random.Range(0, 99999999) % 3);
         SetSprite(ComSprite, ComSelect);
 
         ResultType result = GetResult();
