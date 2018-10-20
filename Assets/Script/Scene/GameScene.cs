@@ -258,8 +258,8 @@ public class GameScene : MonoBehaviour {
             SelectController.DisableAllToggle();
         ResetResultObjs();
         SetActiveVsObj(true);
-
     }
+
     private ResultType GetResultMine()
     {
         ResultType result = ResultType.none;
@@ -337,9 +337,7 @@ public class GameScene : MonoBehaviour {
     private void SetActiveVsObj(bool active)
     {
         if (null != VsObj)
-        {
             VsObj.SetActive(active);
-        }
     }
 
 }
