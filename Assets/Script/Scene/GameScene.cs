@@ -56,6 +56,12 @@ public class GameScene : MonoBehaviour {
     private UILabel LoseLabel = null;
     [SerializeField]
     private UILabel DrawLabel = null;
+    [SerializeField]
+    private TweenPosition WinTweenPos = null;
+    [SerializeField]
+    private TweenPosition LoseTweenPos = null;
+    [SerializeField]
+    private TweenPosition DrawTweenPos = null;
 
 
     // Use this for initialization
@@ -71,6 +77,8 @@ public class GameScene : MonoBehaviour {
         SetBlock(false);
         SetAniInfo(UserAni, true);
         SetAniInfo(ComAni, true);
+        SetResultLabel();
+        ResetResultObjs();
     }
 
     private void SetResultLabel()
@@ -83,6 +91,71 @@ public class GameScene : MonoBehaviour {
 
         if (null != DrawLabel)
             DrawLabel.text = Localization.Get("12");
+    }
+
+    private void ResetResultObjs()
+    {
+        if (null != WinLabel)
+        {
+            WinLabel.gameObject.SetActive(false);
+            WinLabel.transform.localPosition = Vector3.zero;
+        }
+
+        if (null != LoseLabel)
+        {
+            LoseLabel.gameObject.SetActive(false);
+            LoseLabel.transform.localPosition = Vector3.zero;
+        }
+            
+        if (null != DrawLabel)
+        {
+            DrawLabel.gameObject.SetActive(false);
+            DrawLabel.transform.localPosition = Vector3.zero;
+        }
+            
+    }
+
+    private void ActiveResultObj(ResultType type)
+    {
+        switch (type)
+        {
+            case ResultType.Win:
+                {
+                    if (null != WinLabel)
+                        WinLabel.gameObject.SetActive(true);
+                    if (null != WinTweenPos)
+                    {
+                        WinTweenPos.ResetToBeginning();
+                        WinTweenPos.PlayForward();
+                    }
+                }
+                break;
+
+            case ResultType.Lose:
+                {
+                    if (null != LoseLabel)
+                        LoseLabel.gameObject.SetActive(true);
+                    if (null != LoseTweenPos)
+                    {
+                        LoseTweenPos.ResetToBeginning();
+                        LoseTweenPos.PlayForward();
+                    }
+                }
+                break;
+
+            case ResultType.Draw:
+                {
+                    if (null != DrawLabel)
+                        DrawLabel.gameObject.SetActive(true);
+                    if (null != DrawTweenPos)
+                    {
+                        DrawTweenPos.ResetToBeginning();
+                        DrawTweenPos.PlayForward();
+                    }
+                }
+                break;
+        }
+
     }
 
     private void OnEnable()
@@ -161,6 +234,7 @@ public class GameScene : MonoBehaviour {
         ResultType result = GetResult();
         Debug.LogError(result);
         SetRecord(result);
+        ActiveResultObj(result);
         SetRecordLabel();
 
         StartCoroutine(Delay());
@@ -179,6 +253,7 @@ public class GameScene : MonoBehaviour {
         IsSelectUser = false;
         if (SelectController != null)
             SelectController.DisableAllToggle();
+        ResetResultObjs();
 
     }
     private ResultType GetResultMine()
