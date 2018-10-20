@@ -357,4 +357,12 @@ public class GameScene : MonoBehaviour {
             Time.timeScale = 1;
         }
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }
