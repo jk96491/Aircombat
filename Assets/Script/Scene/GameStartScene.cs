@@ -30,6 +30,8 @@ public class GameStartScene : MonoBehaviour {
         {
             UIEventListener.Get(startLabel.gameObject).onClick = HandleOnClickStartLabel; 
         }
+
+        AppManager.Instance.OnPauseDelegate += ApplicationPause;
     }
 
     private void SetLanguageSelectBtnLabel()
@@ -73,5 +75,10 @@ public class GameStartScene : MonoBehaviour {
     private void HandleOnClickStartLabel(GameObject obj)
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    private void ApplicationPause(bool pause)
+    {
+       
     }
 }
