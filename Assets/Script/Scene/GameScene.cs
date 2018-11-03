@@ -81,6 +81,8 @@ public class GameScene : MonoBehaviour {
         SetAniInfo(ComAni, true);
         SetResultLabel();
         ResetResultObjs();
+
+        AppManager.Instance.OnPauseDelegate += ApplicationPause;
     }
 
     private void SetResultLabel()
@@ -344,9 +346,9 @@ public class GameScene : MonoBehaviour {
         }
     }
 
-    private void OnApplicationPause(bool pause)
+    private void ApplicationPause(bool pause)
     {
-        if(pause == true)
+        if (pause == true)
         {
             // 앱이 백그라운드로 나갔을때
             Time.timeScale = 0;
@@ -355,14 +357,6 @@ public class GameScene : MonoBehaviour {
         {
             // 앱이 포그라운드로 들어 왔을때
             Time.timeScale = 1;
-        }
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
         }
     }
 }

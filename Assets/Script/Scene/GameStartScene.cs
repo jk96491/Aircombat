@@ -34,6 +34,11 @@ public class GameStartScene : MonoBehaviour {
         AppManager.Instance.OnPauseDelegate += ApplicationPause;
     }
 
+    private void OnDestroy()
+    {
+        AppManager.Instance.OnPauseDelegate -= ApplicationPause;
+    }
+
     private void SetLanguageSelectBtnLabel()
     {
 
