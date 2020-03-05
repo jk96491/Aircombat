@@ -1,11 +1,11 @@
 # Aircombat
 비행 슈팅게임(space invaders, 갤러그 등등과 유사한)에 대한 Reinforcement Learning Test
 
-<img src="https://user-images.githubusercontent.com/17878413/75980650-4046d000-5f26-11ea-8bbb-6cfd7b7d04eb.png" width = 30%></img>
+<img src="https://user-images.githubusercontent.com/17878413/75980650-4046d000-5f26-11ea-8bbb-6cfd7b7d04eb.png" width = 20%></img>
 
 텐서플로와 유니티 ML-Agents로 배우는 강화학습 - https://wikibook.co.kr/tensorflow-mlagents/ 
 
-<img src="https://user-images.githubusercontent.com/17878413/75980924-c4995300-5f26-11ea-94f8-ebcc139de8a4.png" width = 30%></img>
+<img src="https://user-images.githubusercontent.com/17878413/75980924-c4995300-5f26-11ea-94f8-ebcc139de8a4.png" width = 20%></img>
 
 github - https://github.com/reinforcement-learning-kr/Unity_ML_Agents
 
