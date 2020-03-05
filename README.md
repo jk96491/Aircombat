@@ -24,6 +24,8 @@ pycharm 설치 후 trunk\AircombatPython 위치에서 실행 하시면 됩니다
 
 그 이후 pip install mlagents-envs==0.10.0 로 설치 바랍니다.
 
+tensorflow 1.13.1 버전 
+
 # Unity 빌드 
 왼쪽 상단에 File-Build Settings윈도우 에서 build 버튼 클릭!
 
