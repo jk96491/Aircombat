@@ -2,6 +2,7 @@
 비행 슈팅게임(space invaders, 갤러그 등등과 유사한)에 대한 Reinforcement Learning Test
 
 텐서플로와 유니티 ML-Agents로 배우는 강화학습 - https://wikibook.co.kr/tensorflow-mlagents/ 
+
 github - https://github.com/reinforcement-learning-kr/Unity_ML_Agents
 
 위 서적을 참고하여 제작함.
