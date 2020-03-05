@@ -5,7 +5,7 @@
 
 텐서플로와 유니티 ML-Agents로 배우는 강화학습 - https://wikibook.co.kr/tensorflow-mlagents/ 
 
-<img src="https://user-images.githubusercontent.com/17878413/75980924-c4995300-5f26-11ea-94f8-ebcc139de8a4.png" width = 90%></img>
+<img src="https://user-images.githubusercontent.com/17878413/75980924-c4995300-5f26-11ea-94f8-ebcc139de8a4.png" width = 10%></img>
 
 github - https://github.com/reinforcement-learning-kr/Unity_ML_Agents
 
