@@ -1,10 +1,11 @@
 # Aircombat
- space invaders 게임과 유사한 비행 전투게임 Reinforcement Learning Test
+비행 슈팅게임(space invaders, 갤러그 등등과 유사한)에 대한 Reinforcement Learning Test
 
 텐서플로와 유니티 ML-Agents로 배우는 강화학습 - https://wikibook.co.kr/tensorflow-mlagents/ 
 
 위 서적을 참고하여 제작함.
- 
+
+DDPG 기법 사용 - https://arxiv.org/abs/1509.02971
 
 # 환경설정
 Unity3D(2019.1.14f1)  https://unity3d.com/kr/get-unity/download/archive
