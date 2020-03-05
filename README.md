@@ -5,7 +5,7 @@
 
 github - https://github.com/reinforcement-learning-kr/Unity_ML_Agents
 
-위 서적을 참고하여 제작함.
+위 서적과 github 코드를 참고하여 제작함.
 
 DDPG 기법 사용 - https://arxiv.org/abs/1509.02971
 
