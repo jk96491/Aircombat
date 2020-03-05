@@ -11,3 +11,16 @@ Unity3D(2019.1.14f1)  https://unity3d.com/kr/get-unity/download/archive
 
 pycharm https://www.jetbrains.com/ko-kr/pycharm/download/#section=windows
       
+Unity3D 설치 후 Check out 받은 위치에서 trunk 폴더 위치에서 실행 하면 됩니다.
+
+pycharm 설치 후 trunk\AircombatPython 위치에서 실행 하시면 됩니다
+
+
+# Unity 빌드 
+왼쪽 상단에 File-Build Settings윈도우 에서 build 버튼 클릭!
+
+build후 해당 exe파일은 trunk\AircombatPython\UnityTesting 위치에 Aircombat.exe 생성
+
+# 학습 실행
+
+pycharm 에서 Aircombat.py 실행하기만 하면 됨(디렉터리 설정은 모두 세팅되어 있음!)
