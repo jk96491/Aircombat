@@ -16,8 +16,13 @@ pycharm https://www.jetbrains.com/ko-kr/pycharm/download/#section=windows
       
 Unity3D 설치 후 Check out 받은 위치에서 trunk 폴더 위치에서 실행 하면 됩니다.
 
+ml-agents 0.10.0 버전으로 다운로드 하시기 바랍니다. https://github.com/Unity-Technologies/ml-agents/releases/tag/0.10.0
+
 pycharm 설치 후 trunk\AircombatPython 위치에서 실행 하시면 됩니다
 
+아나콘다 프롬프트를 열어 pip install mlagents==0.10.0 으로 설치해 주시기 바랍니다.
+
+그 이후 pip install mlagents-envs==0.10.0 로 설치 바랍니다.
 
 # Unity 빌드 
 왼쪽 상단에 File-Build Settings윈도우 에서 build 버튼 클릭!
