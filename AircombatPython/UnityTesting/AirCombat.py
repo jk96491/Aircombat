@@ -5,9 +5,6 @@ import datetime
 from collections import deque
 from mlagents.envs.environment import UnityEnvironment
 
-
-
-# DDPG를 위한 parameter값 세팅
 state_size = 8
 action_size = 3
 
@@ -34,7 +31,6 @@ save_interval = 100
 
 date_time = datetime.datetime.now().strftime("%Y%m%d-%H-%M-%S")
 
-# 유니티 환경 경로
 game = "AirCombat"
 env_name = "AirCombat.exe"
 
@@ -69,7 +65,6 @@ class Actor:
         self.trainable_var = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, name)
 
 
-# Critic 클래스 -> Critic 클래스를 통해 상태와 행동에 대한 큐 함수 값을 출력
 class Critic:
     def __init__(self, name):
         with tf.variable_scope(name):
@@ -83,8 +78,6 @@ class Critic:
 
         self.trainable_var = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, name)
 
-
-# DDPG Agent 클래스 -> Actor-Critic을 기반으로 학습하는 에이전트 클래스
 class DDPGAgent:
     def __init__(self):
         self.actor = Actor('actor')
@@ -133,7 +126,6 @@ class DDPGAgent:
         if load_model:
             self.Saver.restore(self.sess, load_path)
 
-    # 액터 모델에서 행동을 예측하고 노이즈 추가
     def get_action(self, state):
         action = self.sess.run(self.actor.action, feed_dict={self.actor.state: state})
         noise = self.OU.sample()
@@ -143,14 +135,13 @@ class DDPGAgent:
         else:
             return action
 
-    # 리플레이 메모리에 데이터 저장
+
     def append_sample(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
 
     def save_model(self):
         self.Saver.save(self.sess, save_path + "/model/model")
 
-    # 모델 학습
     def train_model(self):
         mini_batch = random.sample(self.memory, batch_size)
         states = np.asarray([sample[0] for sample in mini_batch])
@@ -196,17 +187,14 @@ class DDPGAgent:
 
 
 if __name__ == '__main__':
-    # 유니티 환경 설정
     env = UnityEnvironment(file_name=env_name)
     default_brain = env.brain_names[0]
 
-    # DDPGAgent 선언
     agent = DDPGAgent()
     rewards = deque(maxlen=print_interval)
     success_cnt = 0
     step = 0
 
-    # 각 에피소드를 거치며 replay memory에 저장
     for episode in range(run_episode + test_episode):
         if episode == run_episode:
             train_mode = False
@@ -233,21 +221,18 @@ if __name__ == '__main__':
 
             state = next_state
 
-            # train_mode 이고 일정 이상 에피소드가 지나면 학습
             if episode > start_train_episode and train_mode:
                 agent.train_model()
 
         success_cnt = success_cnt + 1 if reward == 1 else success_cnt
         rewards.append(episode_rewards)
 
-        # 일정 이상의 episode를 진행 시 log 출력
         if episode % print_interval == 0 and episode != 0:
             print("step: {} / episode: {} / reward: {:.3f} / success_cnt: {}".format
                   (step, episode, np.mean(rewards), success_cnt))
             agent.Write_Summray(np.mean(rewards), success_cnt, episode)
             success_cnt = 0
 
-        # 일정 이상의 episode를 진행 시 현재 모델 저장
         if train_mode and episode % save_interval == 0 and episode != 0:
             print("model saved")
             agent.save_model()
