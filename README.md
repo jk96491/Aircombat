@@ -15,7 +15,7 @@ DDPG 기법 사용 - https://arxiv.org/abs/1509.02971
 
 # 튜토리얼
 
-https://blog.naver.com/jk96491/221841840402
+비행슈팅게임에 강화학습 적용하기 - https://blog.naver.com/jk96491/221841840402
 
 # 환경설정
 Unity3D(2019.1.14f1)  https://unity3d.com/kr/get-unity/download/archive
