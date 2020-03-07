@@ -1,5 +1,6 @@
 import tensorflow as tf
 
+
 class Actor:
     def __init__(self, name, state_size, action_size):
         with tf.variable_scope(name):
