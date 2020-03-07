@@ -7,9 +7,7 @@
 
    <img src="https://user-images.githubusercontent.com/17878413/75980924-c4995300-5f26-11ea-94f8-ebcc139de8a4.png" width = 17%></img>
 
-github - https://github.com/reinforcement-learning-kr/Unity_ML_Agents
-
-위 서적과 github 코드를 참고하여 제작함.
+위 서적을 참고하여 제작함.
 
 DDPG 기법 사용 - https://arxiv.org/abs/1509.02971
 
