@@ -565,8 +565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155f443858e311148ac16b86e20b28e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 1519207846}
-  projectileManager: {fileID: 1519207845}
   agent: {fileID: 373526258}
 --- !u!1 &344532721
 GameObject:
@@ -1191,7 +1189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broadcastHub:
     broadcastingBrains:
-    - {fileID: 11400000, guid: b90225cda095ffc41b8a92ad446f8c2d, type: 2}
+    - {fileID: 11400000, guid: 227d92ccb05508c44a0a92acb648de3b, type: 2}
     m_BrainsToControl:
     - {fileID: 11400000, guid: b90225cda095ffc41b8a92ad446f8c2d, type: 2}
   m_TrainingConfiguration:
@@ -1295,8 +1293,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bb88159373a664480fb3eae46c8408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileManager: {fileID: 1519207845}
-  enemyMaxCount: 8
   enemies: []
   enemyStartPosTrans:
   - {fileID: 2604574974464454776}
@@ -2055,7 +2051,7 @@ PrefabInstance:
         type: 3}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 11400000, guid: b90225cda095ffc41b8a92ad446f8c2d,
+      objectReference: {fileID: 11400000, guid: 227d92ccb05508c44a0a92acb648de3b,
         type: 2}
     - target: {fileID: 5356358525395992532, guid: ed34cda0a51d7454db7586670ca62035,
         type: 3}

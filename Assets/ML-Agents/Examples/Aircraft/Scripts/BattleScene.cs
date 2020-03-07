@@ -5,10 +5,6 @@ using UnityEngine;
 public class BattleScene : MonoBehaviour
 {
     [SerializeField]
-    private EnemyManager enemyManager = null;
-    [SerializeField]
-    private ProjectileManager projectileManager = null;
-    [SerializeField]
     private AircraftAgent agent = null;
 
     public delegate void TimeOutDel();
@@ -16,29 +12,29 @@ public class BattleScene : MonoBehaviour
 
     private void Awake()
     {
-        projectileManager.Init();
-        enemyManager.Init();
+        ProjectileManager.Instance.Init();
+        EnemyManager.Instance.Init();
         timeOutDel += agent.TimeOut;
     }
 
-    float gameTime = 30;
+    float gameTime = 40;
 
     public void Update()
     {
         float time = Time.deltaTime * 3f;
         agent.UpdateElapesd(time);
-        projectileManager.UpdateElapsed(time);
-        enemyManager.UpdateElapsed(time);
+
+        ProjectileManager.Instance.UpdateElapsed(time);
+        EnemyManager.Instance.UpdateElapsed(time);
 
         gameTime -= time;
 
         if(gameTime <= 0)
         {
             gameTime = 30;
+
             if(null != timeOutDel)
                 timeOutDel();
         }
     }
-    
-
 }

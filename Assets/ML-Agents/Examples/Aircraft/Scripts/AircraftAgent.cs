@@ -4,10 +4,6 @@ using MLAgents;
 public class AircraftAgent : Agent
 {
     [SerializeField]
-    private ProjectileManager projectileManager = null;
-    [SerializeField]
-    private EnemyManager enemyManager = null;
-    [SerializeField]
     private Transform trans = null;
     [SerializeField]
     private Vector3 startPos = Vector3.zero;
@@ -25,7 +21,8 @@ public class AircraftAgent : Agent
 
     int MaxHP = 100;
     int curHP = 100;
-    public bool setDel = false;
+
+    public bool isSetDelegateEvent = false;
 
     private Vector3 firstPos = Vector3.zero;
 
@@ -38,11 +35,12 @@ public class AircraftAgent : Agent
         shootFlowCooltime = 0f;
         MaxHP = curHP;
 
-        if(false == setDel)
+        if(false == isSetDelegateEvent)
         {
-            setDel = true;
-            projectileManager.HitBulletdel += HitBulltEvent;
-            enemyManager.EnemyDieDel += EnemyDieEvent;
+            isSetDelegateEvent = true;
+
+            ProjectileManager.Instance.HitBulletdel += HitBulltEvent;
+            EnemyManager.Instance.EnemyDieDel += EnemyDieEvent;
 
             firstPos = trans.localPosition;
         }
@@ -55,7 +53,7 @@ public class AircraftAgent : Agent
         AddVectorObs(moveX);
         AddVectorObs(moveZ);
         AddVectorObs(shoot);
-        AddVectorObs(enemyManager.curEnemyCount);
+        AddVectorObs(EnemyManager.Instance.curEnemyCount);
         AddVectorObs(curHP);
         AddVectorObs(trans.localPosition);
     }
@@ -78,8 +76,8 @@ public class AircraftAgent : Agent
         curHP = MaxHP;
 
         mainUI.SetHpInfo(MaxHP, curHP);
-        projectileManager.ResetAllBullet();
-        enemyManager.ResetEnemy();
+        ProjectileManager.Instance.ResetAllBullet();
+        EnemyManager.Instance.ResetEnemy();
 
         trans.localPosition = firstPos;
     }
@@ -98,7 +96,7 @@ public class AircraftAgent : Agent
             if (true == shoot)
             {
                 isCooltime = true;
-                projectileManager.ShootBullet(ProjectileManager.SHOOTER.PLAYER, fireHoleTrans.position);
+                ProjectileManager.Instance.ShootBullet(ProjectileManager.SHOOTER.PLAYER, fireHoleTrans.position);
                 SetReward(1f);
             }
         }
@@ -156,7 +154,7 @@ public class AircraftAgent : Agent
     {
         SetReward(50f);
 
-        if(enemyManager.curEnemyCount <= 0)
+        if(EnemyManager.Instance.curEnemyCount <= 0)
         {
             SetReward(100f);
             Done();

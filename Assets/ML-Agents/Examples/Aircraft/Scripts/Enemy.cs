@@ -10,8 +10,7 @@ public class Enemy : MonoBehaviour
         LEFT,
         RIGHT,
     }
-
-    [SerializeField]
+    
     private ProjectileManager projectileManager = null;
     [SerializeField]
     private Transform trans = null;
@@ -27,16 +26,16 @@ public class Enemy : MonoBehaviour
 
     bool first = true;
 
-    public void Init(ProjectileManager projectileManager_)
+    public void Init()
     {
-        if(true == first)
+        projectileManager = ProjectileManager.Instance;
+        if (true == first)
         {
             first = false;
             StartPosX = trans.localPosition.x;
         }
 
         gameObject.SetActive(true);
-        projectileManager = projectileManager_;
 
         MaxHP = 30;
         curHP = MaxHP;

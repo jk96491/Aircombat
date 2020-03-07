@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoSingleton<EnemyManager>
 {
-    [SerializeField]
-    private ProjectileManager projectileManager = null;
-    [SerializeField]
     private int enemyMaxCount = 8;
     [SerializeField]
     private List<Enemy> enemies = null;
@@ -34,18 +31,18 @@ public class EnemyManager : MonoBehaviour
             if (null == ins)
                 continue;
 
-            Enemy script = ins.GetComponent<Enemy>();
+            Enemy EnemyIns = ins.GetComponent<Enemy>();
 
-            if (null == script)
+            if (null == EnemyIns)
                 continue;
 
-            projectileManager.HitBulletdel += script.HitBulltEvent;
+            ProjectileManager.Instance.HitBulletdel += EnemyIns.HitBulltEvent;
 
             float x = enemyStartPosTrans[i % 4].localPosition.x;
-            script.SetPostion(new Vector3(x, 3, startPosZ + (intervalZ * (i / 4))));
+            EnemyIns.SetPostion(new Vector3(x, 3, startPosZ + (intervalZ * (i / 4))));
 
-            script.Init(projectileManager);
-            enemies.Add(script);
+            EnemyIns.Init();
+            enemies.Add(EnemyIns);
         }
 
         curEnemyCount = enemyMaxCount;
@@ -55,15 +52,15 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            Enemy script = enemies[i];
+            Enemy EnemyIns = enemies[i];
 
-            if (null == script)
+            if (null == EnemyIns)
                 continue;
 
             float x = enemyStartPosTrans[i % 4].localPosition.x;
-            script.SetPostion(new Vector3(x, 3, startPosZ + (intervalZ * (i / 4))));
+            EnemyIns.SetPostion(new Vector3(x, 3, startPosZ + (intervalZ * (i / 4))));
 
-            script.Init(projectileManager);
+            EnemyIns.Init();
         }
 
         curEnemyCount = enemyMaxCount;

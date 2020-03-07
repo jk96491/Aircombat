@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileManager : MonoBehaviour
+public class ProjectileManager : MonoSingleton<ProjectileManager>
 {
     public enum SHOOTER : int
     {
