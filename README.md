@@ -37,4 +37,4 @@ build후 해당 exe파일은 trunk\AircombatPython\UnityTesting 위치에 Aircom
 
 # 학습 실행
 
-pycharm 에서 Aircombat.py 실행하기만 하면 됨(디렉터리 설정은 모두 세팅되어 있음!)
+pycharm 에서 main.py 실행하기만 하면 됨(디렉터리 설정은 모두 세팅되어 있음!)
