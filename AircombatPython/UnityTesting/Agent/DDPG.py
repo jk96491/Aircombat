@@ -19,7 +19,7 @@ tau = 1e-3
 date_time = datetime.datetime.now().strftime("%Y%m%d-%H-%M-%S")
 
 save_path = 'SaveModels/' + date_time + "_DDPG"
-load_path = 'SaveModels/20200229-15-50-44_DDPG/model/model'
+load_path = 'SaveModels/20200315-12-51-56_DDPG/model/model'
 
 discount_factor = 0.99
 
@@ -51,7 +51,7 @@ class DDPGAgent:
 
         self.Saver = tf.train.Saver()
         self.Summary, self.Merge = self.Make_Summary()
-        self.OU = OU_noise(action_size)
+        self.OU = OU_noise(action_size, 1)
         self.memory = deque(maxlen=mem_maxlen)
 
         self.soft_update_target = []
@@ -77,7 +77,7 @@ class DDPGAgent:
 
     def get_action(self, state):
         action = self.sess.run(self.actor.action, feed_dict={self.actor.state: state})
-        noise = self.OU.sample()
+        noise = self.OU.StandardNoise(action)
 
         if self.train_mode:
             return action + noise
