@@ -22,6 +22,8 @@ public class AircraftAgent : Agent
     int MaxHP = 100;
     int curHP = 100;
 
+    float flowTime = 0f;
+
     public bool isSetDelegateEvent = false;
 
     private Vector3 firstPos = Vector3.zero;
@@ -56,6 +58,7 @@ public class AircraftAgent : Agent
         AddVectorObs(EnemyManager.Instance.curEnemyCount);
         AddVectorObs(curHP);
         AddVectorObs(trans.localPosition);
+        AddVectorObs(flowTime);
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
@@ -67,6 +70,8 @@ public class AircraftAgent : Agent
 
         if (moveZ == 0 && moveX == 0)
             SetReward(-1);
+        else
+            SetReward(2f * flowTime);
     }
 
     public override void AgentReset()
@@ -74,6 +79,7 @@ public class AircraftAgent : Agent
         shootMaxCooltime = 0.3f;
         shootFlowCooltime = 0f;
         curHP = MaxHP;
+        flowTime = 0f;
 
         mainUI.SetHpInfo(MaxHP, curHP);
         ProjectileManager.Instance.ResetAllBullet();
@@ -111,14 +117,32 @@ public class AircraftAgent : Agent
             }
         }
 
-        if(trans.position.x >= 3.85)
+        flowTime += Elapsed_;
+
+        if (trans.position.x >= 3.85)
+        {
             trans.position = new Vector3(3.85f, trans.position.y, trans.position.z);
+            SetReward(-20f);
+            Done();
+        }
         if (trans.position.x <= -3.85)
+        {
             trans.position = new Vector3(-3.85f, trans.position.y, trans.position.z);
+            SetReward(-20f);
+            Done();
+        }
         if (trans.position.z >= 8)
+        {
             trans.position = new Vector3(trans.position.x, trans.position.y, 8);
+            SetReward(-20f);
+            Done();
+        }
         if (trans.position.z <= 3)
+        {
             trans.position = new Vector3(trans.position.x, trans.position.y, 3);
+            SetReward(-20f);
+            Done();
+        }
 
     }
 
@@ -146,7 +170,7 @@ public class AircraftAgent : Agent
 
         if (shooter == ProjectileManager.SHOOTER.PLAYER)
         {
-            SetReward(10f);
+            SetReward(50f);
         }
     }
 
@@ -171,7 +195,7 @@ public class AircraftAgent : Agent
 
     public void TimeOut()
     {
-        SetReward(-100f);
+        SetReward((8 - EnemyManager.Instance.curEnemyCount) * 30f);
         Done();
     }
 }
