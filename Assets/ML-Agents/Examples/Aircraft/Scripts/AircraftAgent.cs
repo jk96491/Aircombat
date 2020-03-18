@@ -50,6 +50,8 @@ public class AircraftAgent : Agent
         mainUI.SetHpInfo(MaxHP, curHP);
     }
 
+    int crashCount = 0;
+
     public override void CollectObservations()
     {
         AddVectorObs(moveX);
@@ -59,12 +61,21 @@ public class AircraftAgent : Agent
         AddVectorObs(curHP);
         AddVectorObs(trans.localPosition);
         AddVectorObs(flowTime);
+        AddVectorObs(crashCount);
     }
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        moveZ = Mathf.Clamp(vectorAction[0], -1f, 1f);
-        moveX = Mathf.Clamp(vectorAction[1], -1f, 1f);
+        // moveZ = Mathf.Clamp(vectorAction[0], -1f, 1f);
+        //moveX = Mathf.Clamp(vectorAction[1], -1f, 1f);
+
+        moveZ = vectorAction[0];
+        moveX = vectorAction[1];
+
+        float dis = Mathf.Sqrt(vectorAction[0] * vectorAction[0] + vectorAction[1] * vectorAction[1]);
+
+        moveZ /= dis;
+        moveX /= dis;
 
         shoot = Mathf.Clamp(vectorAction[2], -1f, 1f) >= 0;
 
@@ -80,6 +91,7 @@ public class AircraftAgent : Agent
         shootFlowCooltime = 0f;
         curHP = MaxHP;
         flowTime = 0f;
+        crashCount = 0;
 
         mainUI.SetHpInfo(MaxHP, curHP);
         ProjectileManager.Instance.ResetAllBullet();
@@ -137,9 +149,9 @@ public class AircraftAgent : Agent
             SetReward(-20f);
             Done();
         }
-        if (trans.position.z <= 3)
+        if (trans.position.z <= 0)
         {
-            trans.position = new Vector3(trans.position.x, trans.position.y, 3);
+            trans.position = new Vector3(trans.position.x, trans.position.y, 0);
             SetReward(-20f);
             Done();
         }
@@ -170,7 +182,8 @@ public class AircraftAgent : Agent
 
         if (shooter == ProjectileManager.SHOOTER.PLAYER)
         {
-            SetReward(50f);
+            crashCount++;
+            SetReward(50f * crashCount);
         }
     }
 

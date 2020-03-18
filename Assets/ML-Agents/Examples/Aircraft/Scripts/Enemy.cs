@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
 
         float rand = Random.Range(0, 1000);
 
-        if (rand < 4)
+        if (rand < 10)
             projectileManager.ShootBullet(ProjectileManager.SHOOTER.ENEMY, fireHoleTrans.position);
     }
 

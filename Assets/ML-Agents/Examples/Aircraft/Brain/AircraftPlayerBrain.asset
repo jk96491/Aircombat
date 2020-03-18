@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AircraftPlayerBrain
   m_EditorClassIdentifier: 
   brainParameters:
-    vectorObservationSize: 8
+    vectorObservationSize: 9
     numStackedVectorObservations: 1
     vectorActionSize: 03000000
     cameraResolutions: []

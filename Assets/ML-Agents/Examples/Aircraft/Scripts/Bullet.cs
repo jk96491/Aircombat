@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
     {
         shooter = shooter_;
         SetPosition(firePos_);
-        moveZ = shooter == ProjectileManager.SHOOTER.PLAYER ? -1 : 1;
+        moveZ = shooter == ProjectileManager.SHOOTER.PLAYER ? -1.5f : 1f;
 
         if(null != renderer)
             renderer.material = shooter == ProjectileManager.SHOOTER.PLAYER ? mat1 : mat2;
