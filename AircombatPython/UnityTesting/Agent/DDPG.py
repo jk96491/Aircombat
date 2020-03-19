@@ -19,7 +19,7 @@ tau = 1e-3
 date_time = datetime.datetime.now().strftime("%Y%m%d-%H-%M-%S")
 
 save_path = 'SaveModels/' + date_time + "_DDPG"
-load_path = 'SaveModels/20200315-12-51-56_DDPG/model/model'
+load_path = 'SaveModels/20200318-17-20-52_DDPG/model/model'
 
 discount_factor = 0.99
 
@@ -41,7 +41,7 @@ class DDPGAgent:
 
         # Actor Model 학습용
         action_grad = tf.gradients(tf.squeeze(self.critic.predict_q), self.critic.action)
-        policy_grad = tf.gradients(self.actor.action,   self.actor.trainable_var, action_grad)
+        policy_grad = tf.gradients(self.actor.action, self.actor.trainable_var, action_grad)
         for idx, grads in enumerate(policy_grad):
             policy_grad[idx] -= grads / batch_size
         self.train_actor = tf.train.AdamOptimizer(actor_lr).apply_gradients(zip(policy_grad, self.actor.trainable_var))
@@ -51,8 +51,9 @@ class DDPGAgent:
 
         self.Saver = tf.train.Saver()
         self.Summary, self.Merge = self.Make_Summary()
-        self.OU = OU_noise(action_size, 1)
+        self.OU = OU_noise(action_size, 3)
         self.memory = deque(maxlen=mem_maxlen)
+        self.memory_per_episode = []
 
         self.soft_update_target = []
         for idx in range(len(self.actor.trainable_var)):
@@ -87,9 +88,26 @@ class DDPGAgent:
 
     def append_sample(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
+        self.memory_per_episode.append((state, action, reward, next_state, done))
 
     def save_model(self):
         self.Saver.save(self.sess, save_path + "/model/model")
+
+    def save_samples(self, episode_nums):
+        f = open("SampleFiles/{}episode sample.txt".format(episode_nums + 1), 'w')
+        for i in range(len(self.memory_per_episode)):
+            state = "{}".format(self.memory_per_episode[i][0])
+            action = "{}".format(self.memory_per_episode[i][1])
+            reward = "{}".format(self.memory_per_episode[i][2])
+            next_state = "{}".format(self.memory_per_episode[i][3])
+            done = "{}".format(self.memory_per_episode[i][4])
+
+            result = "state : {}\naction : {}\nreward : {}\nnext_state{}\ndone : {}\n\n\n".format(state, action, reward
+                                                                                               , next_state, done)
+            f.write(result)
+
+        f.close()
+        self.memory_per_episode.clear()
 
     def train_model(self):
         mini_batch = random.sample(self.memory, batch_size)

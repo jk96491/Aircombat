@@ -20,7 +20,9 @@ class OU_noise:
 
     def StandardNoise(self, action_):
         noisy_action = np.random.normal(loc=0.0, scale=self.scale, size=action_.shape)
-        return np.clip(noisy_action, -1.0, 1.0)
+        final = np.clip(noisy_action, -2.0, 2.0)
+        #print(final)
+        return final
 
 
 

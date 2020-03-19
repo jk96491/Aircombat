@@ -3,7 +3,7 @@ from collections import deque
 from mlagents.envs.environment import UnityEnvironment
 from UnityTesting.Agent.DDPG import DDPGAgent
 
-state_size = 9
+state_size = 10
 action_size = 3
 
 start_train_episode = 10
@@ -11,7 +11,7 @@ run_episode = 500000
 test_episode = 100000
 
 print_interval = 5
-save_interval = 100
+save_interval = 3000
 
 
 def run(train_mode, load_model, env_name):
@@ -54,6 +54,7 @@ def run(train_mode, load_model, env_name):
 
         success_cnt = success_cnt + 1 if reward == 1 else success_cnt
         rewards.append(episode_rewards)
+        agent.save_samples(episode)
 
         if episode % print_interval == 0 and episode != 0:
             print("step: {} / episode: {} / reward: {:.3f} / success_cnt: {}".format
