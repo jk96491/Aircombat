@@ -19,7 +19,7 @@ tau = 1e-3
 date_time = datetime.datetime.now().strftime("%Y%m%d-%H-%M-%S")
 
 save_path = 'SaveModels/' + date_time + "_DDPG"
-load_path = 'SaveModels/20200318-17-20-52_DDPG/model/model'
+load_path = 'SaveModels/20200323-10-33-09_DDPG/model/model'
 
 discount_factor = 0.99
 
