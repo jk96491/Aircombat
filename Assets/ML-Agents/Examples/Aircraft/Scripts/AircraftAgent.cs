@@ -74,15 +74,20 @@ public class AircraftAgent : Agent
 
         float dis = Mathf.Sqrt(vectorAction[0] * vectorAction[0] + vectorAction[1] * vectorAction[1]);
 
+        if (dis <= 0)
+        {
+            moveZ = 0;
+            moveX = 0;
+            SetReward(-1);
+            return;
+        }
+
         moveZ /= dis;
         moveX /= dis;
 
         shoot = Mathf.Clamp(vectorAction[2], -1f, 1f) >= 0;
 
-        if (moveZ == 0 && moveX == 0)
-            SetReward(-1);
-        else
-            SetReward(2f * flowTime);
+        SetReward(2f * flowTime);
     }
 
     public override void AgentReset()
@@ -149,9 +154,9 @@ public class AircraftAgent : Agent
             SetReward(-20f);
             Done();
         }
-        if (trans.position.z <= 0)
+        if (trans.position.z <= -2)
         {
-            trans.position = new Vector3(trans.position.x, trans.position.y, 0);
+            trans.position = new Vector3(trans.position.x, trans.position.y, -2);
             SetReward(-20f);
             Done();
         }

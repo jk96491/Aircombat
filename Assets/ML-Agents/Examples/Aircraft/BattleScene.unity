@@ -1200,8 +1200,8 @@ MonoBehaviour:
     timeScale: 100
     targetFrameRate: -1
   m_InferenceConfiguration:
-    width: 720
-    height: 1280
+    width: 360
+    height: 640
     qualityLevel: 5
     timeScale: 1
     targetFrameRate: 60
