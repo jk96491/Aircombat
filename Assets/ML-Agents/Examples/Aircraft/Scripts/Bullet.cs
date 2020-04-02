@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private Transform trans = null;
 
     public float moveZ = 0f;
+    public float moveX = 0f;
     private float bulletSpeed = 2f;
     public ProjectileManager.SHOOTER shooter = ProjectileManager.SHOOTER.NONE;
 
@@ -45,16 +46,21 @@ public class Bullet : MonoBehaviour
     public void UpdateElapsed(float Elapsed_)
     {
         if (null != trans)
+        {
             trans.localPosition += Vector3.forward * Elapsed_ * bulletSpeed * moveZ;
+            trans.localPosition += Vector3.left * Elapsed_ * bulletSpeed * moveX;
+        }
+            
     }
 
-    public void ShootBullet(ProjectileManager.SHOOTER shooter_, Vector3 firePos_)
+    public void ShootBullet(ProjectileManager.SHOOTER shooter_, Vector3 firePos_, float xDir = 0f)
     {
         shooter = shooter_;
         SetPosition(firePos_);
         moveZ = shooter == ProjectileManager.SHOOTER.PLAYER ? -1.5f : 1f;
+        moveX = xDir;
 
-        if(null != renderer)
+        if (null != renderer)
             renderer.material = shooter == ProjectileManager.SHOOTER.PLAYER ? mat1 : mat2;
     }
 

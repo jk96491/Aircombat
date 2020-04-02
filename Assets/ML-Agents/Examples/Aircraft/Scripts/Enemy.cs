@@ -43,6 +43,11 @@ public class Enemy : MonoBehaviour
         curDir = Direction.RIGHT;
     }
 
+    float fireMaxCoolTime = 1f;
+    float coolTime = 0f;
+
+    bool isCoolTime = false;
+
     public void UpdateElapsed(float Elapsed_)
     {
         if(null != trans)
@@ -59,10 +64,35 @@ public class Enemy : MonoBehaviour
                 curDir = Direction.LEFT;
         }
 
+        if(true == isCoolTime)
+            coolTime += Elapsed_;
+
         float rand = Random.Range(0, 1000);
 
         if (rand < 10)
-            projectileManager.ShootBullet(ProjectileManager.SHOOTER.ENEMY, fireHoleTrans.position);
+        {
+            if (true == isCoolTime)
+                return;
+
+            isCoolTime = true;
+
+            float rand2 = Random.Range(0, 100);
+
+            if(rand2 > 10)
+                projectileManager.ShootBullet(ProjectileManager.SHOOTER.ENEMY, fireHoleTrans.position);
+            else
+            {
+                projectileManager.ShootBullet(ProjectileManager.SHOOTER.ENEMY, fireHoleTrans.position, -0.3f);
+                projectileManager.ShootBullet(ProjectileManager.SHOOTER.ENEMY, fireHoleTrans.position, 0);
+                projectileManager.ShootBullet(ProjectileManager.SHOOTER.ENEMY, fireHoleTrans.position, 0.3f);
+            }
+        }
+
+        if(coolTime >= fireMaxCoolTime)
+        {
+            isCoolTime = false;
+            coolTime = 0f;
+        }
     }
 
     public void SetPostion(Vector3 pos_)

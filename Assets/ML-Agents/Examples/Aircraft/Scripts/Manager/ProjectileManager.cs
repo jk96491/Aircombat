@@ -65,14 +65,14 @@ public class ProjectileManager : MonoSingleton<ProjectileManager>
         }
     }
 
-    public void ShootBullet(SHOOTER shooter, Vector3 firePos_)
+    public void ShootBullet(SHOOTER shooter, Vector3 firePos_, float xDir = 0f)
     {
         for (int i = 0; i < bullets.Count; i++)
         {
             if (true == bullets[i].gameObject.activeInHierarchy)
                 continue;
 
-            bullets[i].ShootBullet(shooter, firePos_);
+            bullets[i].ShootBullet(shooter, firePos_, xDir);
             bullets[i].SetActive(true);
             break;
         }
